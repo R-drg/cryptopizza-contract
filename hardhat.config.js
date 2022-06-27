@@ -11,6 +11,8 @@ const ALCHEMY_API_URL = process.env.ALCHEMY_API_URL ?? "";
 
 const WALLET_PRIVATE_KEY = process.env.WALLET_PRIVATE_KEY ?? "";
 
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY ?? "";
+
 module.exports = {
   solidity: "0.8.15",
   networks: {
@@ -20,5 +22,6 @@ module.exports = {
     },
   },
   etherscan: {
+    apiKey: ETHERSCAN_API_KEY,
   },
 };
