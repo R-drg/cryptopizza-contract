@@ -112,15 +112,15 @@ contract CryptoPizza is ERC721 {
                 orderAttributes,
                 ', {"trait_type": "Pizza #',
                 Strings.toString(i + 1),
-                '", "value:"',
-                pizzas[pizzaIds[i]].name,
-                '" }'
+                '", "value": "',
+                pizzas[pizzaIds[0]].name,
+                '"} '
             );
         }
         orderAttributes = string.concat(orderAttributes, "]");
         string memory json = Base64.encode(
             abi.encodePacked(
-                '{"name": "CryptoPizza -- NFT #: ',
+                '{"name": "CryptoPizza #',
                 Strings.toString(orderId),
                 '", "description": "This is an NFT of a cryptopizza order!", "image": "',
                 imageURI,

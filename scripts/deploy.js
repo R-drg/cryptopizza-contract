@@ -26,6 +26,7 @@ async function main() {
     imageURI
   );
 
+
   await cryptoPizza.deployed();
 
   console.log("CryptoPizza deployed to:", cryptoPizza.address);
