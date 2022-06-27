@@ -28,8 +28,8 @@ async function main() {
 
   await cryptoPizza.deployed();
 
-
   console.log("CryptoPizza deployed to:", cryptoPizza.address);
+
 }
 
 main()

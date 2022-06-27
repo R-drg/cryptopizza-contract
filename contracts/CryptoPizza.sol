@@ -48,6 +48,7 @@ contract CryptoPizza is ERC721 {
             pizzas.push(pizza);
         }
         imageURI = _imageURI;
+         _tokenIds.increment();
     }
 
     /*
@@ -116,7 +117,7 @@ contract CryptoPizza is ERC721 {
                 '" }'
             );
         }
-        string.concat(orderAttributes, "]");
+        orderAttributes = string.concat(orderAttributes, "]");
         string memory json = Base64.encode(
             abi.encodePacked(
                 '{"name": "CryptoPizza -- NFT #: ',
@@ -125,7 +126,7 @@ contract CryptoPizza is ERC721 {
                 imageURI,
                 '", ',
                 orderAttributes,
-                "}"
+                " }"
             )
         );
         string memory output = string(
