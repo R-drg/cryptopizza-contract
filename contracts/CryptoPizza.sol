@@ -113,7 +113,7 @@ contract CryptoPizza is ERC721 {
                 ', {"trait_type": "Pizza #',
                 Strings.toString(i + 1),
                 '", "value": "',
-                pizzas[pizzaIds[0]].name,
+                pizzas[pizzaIds[i]].name,
                 '"} '
             );
         }
