@@ -16,6 +16,7 @@ contract CryptoPizza is ERC721 {
         string name;
         string description;
         uint256 price;
+        string image;
     }
 
     string public imageURI;
@@ -38,6 +39,7 @@ contract CryptoPizza is ERC721 {
         string[] memory pizzaNames,
         string[] memory pizzaDescriptions,
         uint256[] memory pizzaPrices,
+        string[] memory pizzaImages,
         string memory _imageURI
     ) ERC721("CryptoPizza", "CPZ") {
         for (uint256 i = 0; i < pizzaNames.length; i++) {
@@ -45,6 +47,7 @@ contract CryptoPizza is ERC721 {
             pizza.name = pizzaNames[i];
             pizza.description = pizzaDescriptions[i];
             pizza.price = pizzaPrices[i];
+            pizza.image = pizzaImages[i];
             pizzas.push(pizza);
         }
         imageURI = _imageURI;
@@ -133,5 +136,9 @@ contract CryptoPizza is ERC721 {
             abi.encodePacked("data:application/json;base64,", json)
         );
         return output;
+    }
+
+    function getAllPizzas() public view returns (Pizza[] memory) {
+        return pizzas;
     }
 }

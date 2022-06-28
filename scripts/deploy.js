@@ -1,17 +1,22 @@
 const { ethers } = require("hardhat");
 
 const pizzasData = {
-  names: ["Pepperoni Pizza", "Cheese Pizza", "Marguerita Pizza"],
+  names: ["Pepperoni Pizza", "Portuguese Pizza", "Champignon Pizza"],
   descriptions: [
     "Tomato sauce, pepperoni, mozzarella cheese",
-    "Tomato sauce, cheese, oregano",
-    "Tomato sauce, cheese, basil",
+    "Tomato sauce, portuguese ham, eggs, mozzarella cheese",
+    "Tomato sauce, champignon, mozzarella cheese"
   ],
   prices: [
     ethers.utils.parseEther("0.02"),
     ethers.utils.parseEther("0.025"),
     ethers.utils.parseEther("0.03"),
   ],
+  images: [
+    "https://i.ibb.co/xhFLTvk/pepperoni.png",
+    "https://i.ibb.co/b1mkz2Y/portuguese.png",
+    "https://i.ibb.co/qsGnXDS/champignon.png"
+  ]
 };
 
 const imageURI =
@@ -23,6 +28,7 @@ async function main() {
     pizzasData.names,
     pizzasData.descriptions,
     pizzasData.prices,
+    pizzasData.images,
     imageURI
   );
 
