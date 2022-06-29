@@ -5,12 +5,13 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 import "./libraries/Base64.sol";
 
 //@author: r-drg
 //@title: A contract for buying pizza
-contract CryptoPizza is ERC721 {
+contract CryptoPizza is ERC721, Ownable {
     //Structure of a pizza
     struct Pizza {
         string name;
@@ -23,6 +24,8 @@ contract CryptoPizza is ERC721 {
 
     // Map of each order to the pizzaIds it contains
     mapping(uint256 => uint256[]) public orders;
+
+    mapping(uint256 => bool) public pizzaClaims;
 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
@@ -95,7 +98,17 @@ contract CryptoPizza is ERC721 {
 
         _tokenIds.increment();
 
+        pizzaClaims[newItemId] = false;
+
         emit PizzaOrderCreated(newItemId, pizzaIds, msg.sender);
+    }
+
+    function claimPizza(uint256 tokenId) external onlyOwner {
+        require(
+            pizzaClaims[tokenId] == false,
+            "Pizza has already been claimed"
+        );
+        pizzaClaims[tokenId] = true;
     }
 
     function tokenURI(uint256 orderId)
@@ -120,7 +133,7 @@ contract CryptoPizza is ERC721 {
                 '"} '
             );
         }
-        orderAttributes = string.concat(orderAttributes, "]");
+        orderAttributes = string.concat(orderAttributes, ' ,{"trait_type": "Claimed" , "value": "', pizzaClaims[orderId] ? "True" : "False" , '"} ]');
         string memory json = Base64.encode(
             abi.encodePacked(
                 '{"name": "CryptoPizza #',
