@@ -111,6 +111,10 @@ contract CryptoPizza is ERC721, Ownable {
         pizzaClaims[tokenId] = true;
     }
 
+    function withdrawFunds() external onlyOwner {
+        payable(owner()).transfer(address(this).balance);
+    }
+
     function tokenURI(uint256 orderId)
         public
         view
